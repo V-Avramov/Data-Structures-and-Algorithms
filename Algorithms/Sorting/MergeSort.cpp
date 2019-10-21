@@ -5,9 +5,6 @@ void merge(T*arr, int l, int m, int r) {
 	int n2 = r - m;
 	T*L = new T[n1];
 	T*R = new T[n2];
-	i = 0;
-	j = 0;
-	k = l;
 	for (i = 0; i < n1; i++)
 		L[i] = arr[l + i];
 	for (j = 0; j < n2; j++)
