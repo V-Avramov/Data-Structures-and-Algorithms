@@ -5,6 +5,8 @@ void PrintArr(T arr[], int size) {
 	for (size_t i = 0; i < size; i++) {
 		std::cout << arr[i] << " ";
 	}
+	
+  std::cout << std::endl;
 }
 
 template<class T>
@@ -36,7 +38,7 @@ int main(){
 
   CountingSort<int>(arr, 5);
   PrintArr<int>(arr, 5);
-  std::cout<<std::endl;
+	
   CountingSort<char>(str, 12);
   PrintArr<char>(str, 13);
 
