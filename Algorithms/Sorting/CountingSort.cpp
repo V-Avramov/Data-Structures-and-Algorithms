@@ -14,7 +14,7 @@ void CountingSort(T*arr, int size) {
 		if (maxElem < arr[i])
 			maxElem = arr[i];
 	}
-	T*countingArr = new T[maxElem + 1];
+	int*countingArr = new int[maxElem + 1];
 	for (int i = 0; i < maxElem + 1; i++)
 		countingArr[i] = 0;
 	for (int i = 0; i < size; i++)
@@ -36,7 +36,7 @@ int main(){
 
   CountingSort<int>(arr, 5);
   PrintArr<int>(arr, 5);
-
+  std::cout<<std::endl;
   CountingSort<char>(str, 12);
   PrintArr<char>(str, 13);
 
