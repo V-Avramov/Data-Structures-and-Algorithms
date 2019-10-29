@@ -11,5 +11,5 @@ TernarySearch
 (same as Binary Search)
 
 JumpSearch
--Worst case complexety O(sqrt(n))
+-Worst case complexety O(sqrt(n)).
 -Usable only on sorted array(list,stack...)!!! 
