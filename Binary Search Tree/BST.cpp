@@ -121,7 +121,7 @@ int main() {
 	tree.insert(5);
 	tree.insert(6);
 	tree.remove(30);
-	//std::cout << tree.find(4);
+	//std::cout << tree.contains(4);
 	tree.printInOrder();
 	
 	return 0;
