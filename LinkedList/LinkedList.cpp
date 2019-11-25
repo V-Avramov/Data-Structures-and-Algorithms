@@ -11,7 +11,7 @@ public:
 		head = NULL;
 		tail = NULL;
 	}
-	void insertAtEnd(int value) {
+	void InsertAtEnd(int value) {
 		Node*temp = new Node;
 		temp->data = value;
 		temp->next = NULL;
@@ -21,8 +21,54 @@ public:
 			return;
 		}
 		tail->next = temp;
-		temp->prev = tail;
 		tail = temp;
+	}
+
+	void InsertAtStart(int value) {
+		Node*temp = new Node;
+		temp->data = value;
+		temp->next = NULL;
+		if (head == NULL) {
+			head = temp;
+			tail = temp;
+		}
+		else {
+			temp->next = head;
+			head = temp;
+		}
+	}
+	void InsertAtPosition(int value, int position) {
+		Node*temp = new Node;
+		Node*curr = head;
+		Node*prev;
+		temp->data = value;
+		if (position == 1 || head == NULL && position > 0)
+			InsertAtStart(value);
+		for (int i = 0; i < position; i++) {
+			prev = curr;
+			curr = curr->next;
+			if (curr == NULL)
+				InsertAtEnd(value);
+		}
+		prev->next = temp;
+		temp->next = curr;
+	}
+	void RemoveEnd() {
+		Node*temp = head;
+		Node*prev;
+		if (head == NULL)
+			return;
+		while (temp->next != NULL) {
+			prev = temp;
+			temp = temp->next;
+		}
+		prev->next = NULL;
+	}
+	void RemoveStart() {
+		if (head != NULL) {
+			Node*next = head->next;
+			head = next;
+		}
 	}
 
 	void RemoveAtPos(int position) {
@@ -49,23 +95,25 @@ public:
 	}
 
 	void RemoveAll(int value) {
-		if (head == NULL)
-			return;
-		while (head->data == value && head != NULL) {
-			head = head->next;
-		}
-		//Node*prev;
-		Node*curr = head;
-		while (curr->next != NULL) {
-			if (curr->next->data == value) {
-				curr->next = curr->next->next;
-				continue;
+		Node* prev = NULL;
+		Node* curr = head;
+
+		while (curr != NULL) {
+			if (curr->data == value) {
+				Node* tmp = curr;
+				curr = curr->next;
+				if (prev == NULL) {
+					head = curr;
+				}
+				else {
+					prev->next = curr;
+				}
+				delete tmp;
 			}
-			curr = curr->next;
-		}
-		if (curr->data == value) {
-			curr = NULL;
-			return;
+			else {
+				prev = curr;
+				curr = curr->next;
+			}
 		}
 	}
 	bool isEmpty() {
@@ -84,17 +132,6 @@ public:
 		return max;
 	}
 
-	void TeamSelection(int k) {
-		int team = 1;
-		Node*temp = head;
-		while (!isEmpty()) {
-			if (temp == getMax()) {
-				temp->data = team;
-				while
-			}
-		}
-	}
-
 	void print() {
 		Node*temp = head;
 		while (temp != NULL) {
@@ -106,8 +143,26 @@ public:
 		Node*temp = tail;
 		while (temp != head) {
 			std::cout << temp->data << " ";
-			temp = temp->prev;
 		}
 		std::cout << temp->data << " ";
 	}
 };
+
+int main() {
+
+	LinkedList list;
+	list.InsertAtEnd(1);
+	list.InsertAtEnd(2);
+	list.InsertAtEnd(3);
+	list.InsertAtEnd(4);
+	list.InsertAtEnd(5);
+	//list.InsertAtPosition(3, 3);
+	//list.RemoveAll(3);
+	//list.RemoveEnd();
+	list.RemoveAtPos(3);
+
+	list.print();
+
+	
+	return 0;
+}
