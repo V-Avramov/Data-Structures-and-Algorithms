@@ -64,7 +64,9 @@ private:
 				while (swapWith->left) {
 					swapWith = swapWith->left;
 				}
+				//swap the values
 				current->data = swapWith->data;
+				//traverse once again so that the swapped value is removed from its previous place
 				current->right = _remove(current->right, swapWith->data);
 			}
 		}
