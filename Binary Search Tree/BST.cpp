@@ -32,27 +32,43 @@ private:
 		return findMax(root->right);
 	}
 
-	Node*remove(Node*root, int value) {
-		if (root == NULL) {
-			return NULL;
+	Node* _remove(Node* current, int value) {
+		if (!current) {
+			return nullptr;
 		}
-		if (value > root->data) {
-			root->right = remove(root->right, value);
+
+		if (value < current->data) {
+			current->left = _remove(current->left, value);
 		}
-		else if (value < root->data) {
-			root->left = remove(root->left, value);
+		else if (value > current->data) {
+			current->right = _remove(current->right, value);
 		}
-		else {
-			if (root->left == NULL) {
-				Node*tmp = root->right;
-				delete root;
-				return tmp;
+		else { // value = current->data;
+			if (!current->left && !current->right) {
+				delete current;
+				return nullptr;
 			}
-			Node*MaxInLeftSubTree = findMax(root->left);
-			root->data = MaxInLeftSubTree->data;
-			root->left = remove(root->left, root->data);
+			else if (!current->left) {
+				Node* tempRight = current->right;
+				delete current;
+				return tempRight;
+			}
+			else if (!current->right) {
+				Node* tempLeft = current->left;
+				delete current;
+				return tempLeft;
+			}
+			else {
+				Node* swapWith = current->right;
+				while (swapWith->left) {
+					swapWith = swapWith->left;
+				}
+				current->data = swapWith->data;
+				current->right = _remove(current->right, swapWith->data);
+			}
 		}
-		return root;
+
+		return current;
 	}
   
   bool contains(Node*root, int value) {
@@ -103,7 +119,7 @@ public:
 	}
 
 	void remove(int value) {
-		root = remove(root, value);
+		root = _remove(root, value);
 	}
 
 	void printInOrder() {
