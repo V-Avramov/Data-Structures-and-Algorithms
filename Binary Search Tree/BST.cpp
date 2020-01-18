@@ -60,6 +60,7 @@ private:
 			}
 			else {
 				Node* swapWith = current->right;
+				//go to the lowest cost element of the right sub-tree
 				while (swapWith->left) {
 					swapWith = swapWith->left;
 				}
