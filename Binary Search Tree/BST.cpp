@@ -101,7 +101,7 @@ private:
 		}
 	}
 public:
-	BST(int value) {
+	BST() {
 		root = NULL;
 	}
 	void insert(int value) {
@@ -132,7 +132,7 @@ public:
 
 int main() {
 
-	BST tree(5);
+	BST tree();
 	tree.insert(1);
 	tree.insert(2);
 	tree.insert(3);
