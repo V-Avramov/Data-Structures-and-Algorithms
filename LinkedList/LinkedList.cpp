@@ -6,6 +6,13 @@ struct Node {
 class LinkedList {
 private:
 	Node*head,*tail;
+	
+	void printReverse(Node*curr) {
+		if (curr->next != NULL) {
+			printReverse(curr->next);
+		}
+		cout << curr->data << " ";
+	}
 public:
 	LinkedList() {
 		head = NULL;
@@ -140,11 +147,22 @@ public:
 		}
 	}
 	void printBackwards() {
-		Node*temp = tail;
-		while (temp != head) {
-			std::cout << temp->data << " ";
+		Node*curr = head;
+		printReverse(curr);
+	}
+
+	void reverse() {
+		Node*prev = NULL;
+		Node*curr = head;
+		Node*following;
+		tail = curr;
+		while (curr != NULL) {
+			following = curr->next;
+			curr->next = prev;
+			prev = curr;
+			curr = following;
 		}
-		std::cout << temp->data << " ";
+		head = prev;
 	}
 };
 
